@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    JS代码开发规范 |  伯温
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-JS代码开发规范" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  JS代码开发规范
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/13/JS%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="article-date">
+  <time datetime="2020-05-13T12:59:23.423Z" itemprop="datePublished">2020-05-13</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8 分钟</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h1 id="前端JS代码规范"><a href="#前端JS代码规范" class="headerlink" title="前端JS代码规范"></a>前端JS代码规范</h1><h2 id="一、文档背景"><a href="#一、文档背景" class="headerlink" title="一、文档背景"></a>一、文档背景</h2><blockquote>
+<p>为了使团队中的每一位成员都形成统一的开发约定，特制定本规范文档，在今后的开发过程中，请严格按照此文档约定的规则进行编码。通过此规范，希望可以给各开发人员之间起到沟通的桥梁作用，带来项目的可读性和可维护性。<br>如在使用过程中，碰到本文档中没进行约定的规则，待商议后对该文档进行补充和完善，这也将是一个持续的过程。</p>
+</blockquote>
+<h2 id="二、命名规范"><a href="#二、命名规范" class="headerlink" title="二、命名规范"></a>二、命名规范</h2><ol>
+<li><p>所有命名都必须使用能直接体现具体含义的名字，不使用X，Y，Z，等无意义的名称进行定义，除循环变量除外。</p>
+</li>
+<li><p>命名以不超过4个单词为优。 如正确形式：titleBtn。错误形式：mainPageTileButton</p>
+</li>
+<li><p>变量命名原则</p>
+<ul>
+<li>骆驼命名法，首字母小写，之后每个单词首字母大写（即首字母小写的驼峰）</li>
+<li>公开变量，不带下划线，如 userName、currState、loginTime</li>
+<li>私有变量，前缀下划线，如 _callBackList、_nameHash、_currType</li>
+<li>常量，全大写，每个单词之间使用下划线分割，如：TOUCH_COMPLETE、SEND_OVER、RENDER_TYPE_1</li>
+<li>词性格式，普通的变量以名词为主，布尔类型的变量以形容词/形容词+名词/形容词+动词为主，如：_isOk   _canBuild  _roleLevel _nameImg</li>
+<li>其他规则，容易产生误解的变量，考虑加上类型后缀，如：nameTxt、nameStr、avatarId（注意表示id的变量，以Id尾缀会更加清晰）</li>
+</ul>
+</li>
+<li><p>类定义名命名原则</p>
+<ul>
+<li>骆驼命名法，首字母大写，之后每个单词首字母大写</li>
+<li>词性格式：以名词为主</li>
+</ul>
+</li>
+<li><p>方法名命名原则</p>
+<ul>
+<li>骆驼命名法，首字母小写的驼峰</li>
+<li>词性格式：以动词+名词为主，如doAction()，updateData()、setView()<pre><code>c.getter/setter，以名词、形容词+名词为主</code></pre></li>
+</ul>
+</li>
+<li><p>其他约定</p>
+<ul>
+<li>不使用拼音</li>
+<li>不使用复杂的单词（尽量使用近义的小学生初中生单词，以不超过高中生单词为优，写代码不是为了秀英语，整一堆复杂的词没有任何意义！）</li>
+<li>不使用很长的单词，能缩写的尽量使用缩写形式。较好的形式：showSysMsg()。不是很好的形式：showSystemMessage()</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、代码格式规范"><a href="#三、代码格式规范" class="headerlink" title="三、代码格式规范"></a>三、代码格式规范</h2><ol>
+<li>注释的书写<blockquote>
+<p>注意：公共方法需要注明注释（通用方法可省略注释）需要写明参数的描述、返回值的描述。必要时需注明参数结构或返回值结构，或贴上数据结构的样板</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>正确写法:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**调接口</span><br><span class="line"> * @param cmd 接口名</span><br><span class="line"> * @param param 传递的参数</span><br><span class="line"> * @param callback 成功的回调</span><br><span class="line"> * @param errorback 失败的回调</span><br><span class="line"> *&#x2F;</span><br><span class="line">function call(cmd, param, callback, errorback)</span><br><span class="line">&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>错误写法:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;调接口</span><br><span class="line">	function call(cmd, param, callback, errorback)</span><br><span class="line">	&#123;</span><br><span class="line">	...</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>显式声明<blockquote>
+<p>所有的成员变量必须在所有成员方法前面声明，用一个换行把它和方法分开，变量类型要显式声明。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>正确写法:</strong></p>
+<figure class="highlight plain"><figcaption><span>sys;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">(function (sys)</span><br><span class="line">&#123;</span><br><span class="line">   var Message&#x3D;(function()</span><br><span class="line">   &#123;</span><br><span class="line">        var _msgStr&#x3D;&quot;&quot;;</span><br><span class="line">        var _showType&#x3D;1;</span><br><span class="line">        var _proto&#x3D;SystemMsg.prototype;</span><br><span class="line">        function SystemMsg()</span><br><span class="line">        &#123;</span><br><span class="line">          this.skinName&#x3D;&quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        _proto.show&#x3D;function()</span><br><span class="line">        &#123;</span><br><span class="line">            clear();</span><br><span class="line">            .....</span><br><span class="line">        &#125;</span><br><span class="line">        function clear()</span><br><span class="line">        &#123;</span><br><span class="line">             _msgStr&#x3D;&quot;&quot;;</span><br><span class="line">             _showType&#x3D;1;</span><br><span class="line">        &#125;</span><br><span class="line">        return SystemMsg;</span><br><span class="line">   &#125;())</span><br><span class="line">&#125;)(sys || (sys&#x3D;&#123;&#125;))</span><br></pre></td></tr></table></figure>
+<p><strong>错误写法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">var sys;</span><br><span class="line">(function (sys)</span><br><span class="line">&#123;</span><br><span class="line">   var Message&#x3D;(function()</span><br><span class="line">   &#123;</span><br><span class="line">        var _proto&#x3D;SystemMsg.prototype;</span><br><span class="line">        function SystemMsg()</span><br><span class="line">        &#123;</span><br><span class="line">          this.skinName&#x3D;&quot;&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        _proto.show&#x3D;function()</span><br><span class="line">        &#123;</span><br><span class="line">            clear();</span><br><span class="line">            .....</span><br><span class="line">        &#125;</span><br><span class="line">        var _msgStr&#x3D;&quot;&quot;;</span><br><span class="line">        var _showType&#x3D;1;</span><br><span class="line">        function clear()</span><br><span class="line">        &#123;</span><br><span class="line">             _msgStr&#x3D;&quot;&quot;;</span><br><span class="line">             _showType&#x3D;1;</span><br><span class="line">        &#125;</span><br><span class="line">        return SystemMsg;</span><br><span class="line">   &#125;())</span><br><span class="line">&#125;)(sys || (sys&#x3D;&#123;&#125;))</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>花括号语句<blockquote>
+<p>判断语句if、for、while、do等语句自占一行，执行语句不得紧跟其后，不论执行语句有多少都必须加{}。这样可以防止修改代码时失误。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>正确写法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function doLogin()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">if(表达式)</span><br><span class="line">&#123;</span><br><span class="line">   if(表达式)</span><br><span class="line">   &#123;</span><br><span class="line">      逻辑...</span><br><span class="line">   &#125;</span><br><span class="line">   else</span><br><span class="line">   &#123;</span><br><span class="line">      逻辑...</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>错误写法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function doLogin &#123;</span><br><span class="line">&#125;</span><br><span class="line">if(表达式)</span><br><span class="line">   if(表达式)</span><br><span class="line">      逻辑...</span><br><span class="line">if(表达式)&#123;</span><br><span class="line">    if(表达式)&#123;</span><br><span class="line">        逻辑...</span><br><span class="line">&#125;&#125;</span><br><span class="line">if(表达式)&#123;逻辑...&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><p>switch语句一定要有default来处理意外情况。</p>
+</li>
+<li><p>不同函数或方法之间，需要用空行来分开。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function LoginModule</span><br><span class="line">&#123;</span><br><span class="line">    function doLogin()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    function onComplete_login(ev)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>一个方法只完成一个任务。不要把多个任务组合到一个方法中。</p>
+</li>
+<li><p>避免使用大文件。如一个文件里的代码超过500行，必须考虑将代码按功能进行重构。</p>
+</li>
+<li><p>尽量不用try…catch，特别是在for循环中。</p>
+</li>
+<li><p>类型声明(列表包含基本经常使用的类型)</p>
+<p>在定义变量时，后缀类型，如果是组件，后缀组件类型，其他遵循驼峰法则。<br><br>示例：secondTxt   nameStr   contentObj     xmlLdr   memberListArr</p>
+</li>
+<li><p>实例名<br>实例名尽量不要起和类名无关的名字，尽量以类名保持一致，以提高识别度<br><br>例如：var skillData=new SkillData();</p>
+</li>
+<li><p>注释规范</p>
+</li>
+</ol>
+<ul>
+<li>注释必须使用中文及中文的标点符号。</li>
+<li>每行注释的最大长度不能超过1024*800的宽度，且需要与代码对齐。</li>
+<li>将注释与注释分隔符用一个空格分开。</li>
+<li>编码的同时书写注释。</li>
+<li>重要变量必须有注释。</li>
+<li>变量注释和变量在同一行，所有注释必须对齐。</li>
+<li>典型算法必须有注释。</li>
+<li>在循环和逻辑分支的地方必须写上注释。</li>
+<li>程序段或语句的注释在程序段或语句的上一行。</li>
+<li>在项目编译前，必须删掉临时的或无关的注释。</li>
+<li>项目引擎中最好有统一的log管理模块，避免直接使用console对象</li>
+<li>object对象注释详解（不强制要求）<ol>
+<li>a.hash类型的对象： {[key:T]:U}<br>如：var _hash;  //{[skillId:number]:SkillData}<br>表示hash表的key为skillId，值的类型为SkillData。</li>
+<li>b.Array类型的对象： T[]；二维数组：T[][]（注意，通常情况下，如果写明了类型，不加注释也可以）<br>如：var _list; //number[][];</li>
+<li>c.function类型对象：(param:U)=&gt;T<br>如： var getIdList; //()=&gt;number[]<br>表示getIdList是一个方法，返回一个number[]</li>
+</ol>
+</li>
+</ul>
+<h2 id="四、注意事项"><a href="#四、注意事项" class="headerlink" title="四、注意事项"></a>四、注意事项</h2><ol>
+<li><p>最重要的代码习惯：</p>
+<ul>
+<li>能够使用简单逻辑的，不要使用复杂逻辑</li>
+<li>尽量在项目中不使用未被广泛使用的框架或新技术，以保证稳定性及技术的统一性。</li>
+<li>对于可能影响性能，或者可能存在隐患的编码习惯要保持警惕性。如：尽量不使用try…catch，setInterval,setTimeout等，在新建模块或者新建类的时候，第一时间就要写dispose</li>
+</ul>
+</li>
+<li><p>模块内与模块间，系统内及系统间的交互方式</p>
+<ul>
+<li>模块内的逻辑交互，可以使用事件，调公共方法，命名模式，回调等，这些都没有问题</li>
+<li>模块间的交互，尽量使用调公共方法的方式，以便代码回溯。</li>
+<li>系统内的交互，采用事件及公共方法的方式，系统功能的调用由系统提供公共方法，系统机制在运行中，发出重要的时间，模块可以监听需要的事件以触发业务逻辑。</li>
+<li>系统间的交互，需要考虑完全的松耦合，以事件为主</li>
+</ul>
+</li>
+<li><p>业务逻辑分层</p>
+<ul>
+<li>在对业务逻辑进行划分时，应避免将线性逻辑，强行分割为两个类，并在主类中实例化另一个类，这会降低代码的可读性，并且运行时生成了不必要的对象（每一个对象的生成都是需要占用系统内存的）。</li>
+<li>正确的做法是，线性逻辑在同一个类中完成，逻辑涉及的功能分割为功能类，由主类进行控制。程序员需要关心线性逻辑时，可以不必查看功能模块的代码，关心功能模块时，可以不必仔细阅读线性逻辑的代码。</li>
+</ul>
+</li>
+<li><p>对象数量的控制</p>
+<ul>
+<li>应避免实例化太多的对象用于处理简单逻辑</li>
+<li>应避免实例化很多对象，而对象内部的逻辑其实是单例对象处理的</li>
+<li>应避免实例化很多对象，用于生成数据对象</li>
+<li>因为这些对象可能会由于无人清理而一直占用着内存</li>
+</ul>
+</li>
+</ol>
+<h2 id="五、重点补充"><a href="#五、重点补充" class="headerlink" title="五、重点补充"></a>五、重点补充</h2><ol>
+<li><p>dom里面叫什么名字，方法里面就叫什么名字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button name&#x3D;&quot;okBtn&quot; @click&#x3D;&quot;onClick_okBtn&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义叫什么名字，实例就叫什么名字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var shopItem&#x3D;new ShopItem();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成对象的方法叫什么名字，声明赋值的变量就叫什么名字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var groupList&#x3D; xxx.getGroupList();</span><br></pre></td></tr></table></figure></li>
+<li><p>事件监听器的命令规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">on事件类型_target(e)</span><br><span class="line">&#123;</span><br><span class="line">   ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>比如：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function onClick_closeBtn(e)</span><br><span class="line">function onClick_linkBtn(e)</span><br><span class="line">function onClick_item(e)</span><br><span class="line">function onClick_showMoreBtn(e)</span><br></pre></td></tr></table></figure>
+<p> 千万不要取这样的名字,不利于追溯代码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">onClick_popPanel(e)</span><br><span class="line"></span><br><span class="line">onClick_checkAccount(e)</span><br><span class="line"></span><br><span class="line">onClick_doLogin(e)</span><br><span class="line"></span><br><span class="line">onClick_showLoading(e)</span><br></pre></td></tr></table></figure></li>
+<li><p>命名总结</p>
+<ul>
+<li>只有定义，是首字母大写的驼峰，   MainNav</li>
+<li>其余首字母都是小写的驼峰  listItem</li>
+<li>私有变量，变量前缀_           _currPage</li>
+<li>入参，参数前缀$（公共方法一定要加，私有方法如果没加能看懂也可以，但是尽量养成习惯）     function  showPanel($panelName,  $showType , $tweenType)</li>
+<li>方法名。必须是：动词加名词（事件监听器前缀on）</li>
+</ul>
+</li>
+</ol>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>版权声明： </strong>
+              本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/13/JS%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/05/13/hello-world/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Hello World</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2020
+        <i class="ri-heart-fill heart_icon"></i> Alan Sun
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="伯温"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Subtitle -->
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+    console.log(err)
+  }
+</script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+    
+  </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":100,"vOffset":-20},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
