@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>雅虎前端优化的35条规则 |  伯温的博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/icon.JPG" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-优化-雅虎前端优化的35条规则"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  雅虎前端优化的35条规则
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/%E4%BC%98%E5%8C%96-%E9%9B%85%E8%99%8E%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96%E7%9A%8435%E6%9D%A1%E8%A7%84%E5%88%99/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96/">前端优化</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">6.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">22 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="1-减少http请求次数"><a href="#1-减少http请求次数" class="headerlink" title="1 减少http请求次数"></a>1 减少http请求次数</h4><p>80%的终端用户响应时间都花在了前端上，其中大部分时间都在下载页面上的各种组件：图片，样式表，脚本，Flash等等。减少组件数必然能够减少页面提交的HTTP请求数。这是让页面更快的关键。</p>
+<p>合并文件：是通过把所有脚本放在一个文件中的方式来减少请求数的，当然，也可以合并所有的CSS。如果各个页面的脚本和样式不一样的话，合并文件就是一项比较麻烦的工作了，但把这个作为站点发布过程的一部分确实可以提高响应时间。<br>　　CSS Sprites：是减少图片请求数量的首选方式。把背景图片都整合到一张图片中，然后用CSS的background-image和background-position属性来定位要显示的部分。<br>　　图像映射：可以把多张图片合并成单张图片，总大小是一样的，但减少了请求数并加速了页面加载。图片映射只有在图像在页面中连续的时候才有用，比如导航条。给image map设置坐标的过程既无聊又容易出错，用image map来做导航也不容易，所以不推荐用这种方式。<br>　　行内图片（Base64编码）：用data: URL模式来把图片嵌入页面。这样会增加HTML文件的大小，把行内图片放在（缓存的）样式表中是个好办法，而且成功避免了页面变“重”。但目前主流浏览器并不能很好地支持行内图片。<br>　　减少页面的HTTP请求数是个起点，这是提升站点首次访问速度的重要指导原则。</p>
+<h4 id="2-减少DNS查询次数"><a href="#2-减少DNS查询次数" class="headerlink" title="2 减少DNS查询次数"></a>2 减少DNS查询次数</h4><p>域名系统建立了主机名和IP地址间的映射，就像电话簿上人名和号码的映射一样。当你在浏览器输入<a target="_blank" rel="noopener" href="http://www.yahoo.com的时候,浏览器就会联系dns解析器返回服务器的ip地址.dns是有成本的,它需要20到120毫秒去查找给定主机名的ip地址.在dns查找完成之前,浏览器无法从主机名下载任何东西./">www.yahoo.com的时候，浏览器就会联系DNS解析器返回服务器的IP地址。DNS是有成本的，它需要20到120毫秒去查找给定主机名的IP地址。在DNS查找完成之前，浏览器无法从主机名下载任何东西。</a><br>　　DNS查找被缓存起来更高效，由用户的ISP（网络服务提供商）或者本地网络存在一个特殊的缓存服务器上，但还可以缓存在个人用户的计算机上。DNS信息被保存在操作系统的DNS cache(微软Windows上的”DNS客户端服务”)里。大多数浏览器有独立于操作系统的自己的cache。只要浏览器在自己的cache里还保留着这条记录，它就不会向操作系统查询DNS。<br>　　IE默认缓存DNS查找30分钟，写在DnsCacheTimeout注册表设置中。Firefox缓存1分钟，可以用network.dnsCacheExpiration配置项设置。(Fasterfox把缓存时间改成了1小时 P.S. Fasterfox是FF的一个提速插件)<br>　　如果客户端的DNS cache是空的（包括浏览器的和操作系统的），DNS查找数等于页面上不同的主机名数，包括页面URL，图片，脚本文件，样式表，Flash对象等等组件中的主机名，减少不同的主机名就可以减少DNS查找。<br>　　减少不同主机名的数量同时也减少了页面能够并行下载的组件数量，避免DNS查找削减了响应时间，而减少并行下载数量却增加了响应时间。我的原则是把组件分散在2到4个主机名下，这是同时减少DNS查找和允许高并发下载的折中方案。</p>
+<h4 id="3-避免重定向"><a href="#3-避免重定向" class="headerlink" title="3 避免重定向"></a>3 避免重定向</h4><p>重定向用301和302状态码，下面是一个有301状态码的HTTP头：<br>HTTP/1.1 301 Moved Permanently<br>      Location: <a href="http://example.com/newuri">http://example.com/newuri</a><br>      Content-Type: text/html<br>　　浏览器会自动跳转到Location域指明的URL。重定向需要的所有信息都在HTTP头部，而响应体一般是空的。其实额外的HTTP头，比如Expires和Cache-Control也表示重定向。除此之外还有别的跳转方式：refresh元标签和JavaScript，但如果你必须得做重定向，最好用标准的3xxHTTP状态码，主要是为了让返回按钮能正常使用。<br>　　牢记重定向会拖慢用户体验，在用户和HTML文档之间插入重定向会延迟页面上的所有东西，页面无法渲染，组件也无法开始下载，直到HTML文档被送达浏览器。<br>　　有一种常见的极其浪费资源的重定向，而且web开发人员一般都意识不到这一点，就是URL尾部缺少一个斜线的时候。例如，跳转到<a target="_blank" rel="noopener" href="http://astrology.yahoo.com/astrology%E4%BC%9A%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA%E9%87%8D%E5%AE%9A%E5%90%91%E5%88%B0http://astrology.yahoo.com/astrology/%E7%9A%84301%E5%93%8D%E5%BA%94%EF%BC%88%E6%B3%A8%E6%84%8F%E6%B7%BB%E5%9C%A8%E5%B0%BE%E9%83%A8%E7%9A%84%E6%96%9C%E7%BA%BF%EF%BC%89%E3%80%82%E5%9C%A8Apache%E4%B8%AD%E5%8F%AF%E4%BB%A5%E7%94%A8Alias%EF%BC%8Cmod_rewrite%E6%88%96%E8%80%85DirectorySlash%E6%8C%87%E4%BB%A4%E6%9D%A5%E5%8F%96%E6%B6%88%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E9%87%8D%E5%AE%9A%E5%90%91%E3%80%82">http://astrology.yahoo.com/astrology会返回一个重定向到http://astrology.yahoo.com/astrology/的301响应（注意添在尾部的斜线）。在Apache中可以用Alias，mod_rewrite或者DirectorySlash指令来取消不必要的重定向。</a><br>　　重定向最常见的用途是把旧站点连接到新的站点，还可以连接同一站点的不同部分，针对用户的不同情况（浏览器类型，用户帐号类型等等）做一些处理。用重定向来连接两个网站是最简单的，只需要少量的额外代码。虽然在这些时候使用重定向减少了开发人员的开发复杂度，但降低了用户体验。一种替代方案是用Alias和mod_rewrite，前提是两个代码路径都在相同的服务器上。如果是因为域名变化而使用了重定向，就可以创建一条CNAME（创建一个指向另一个域名的DNS记录作为别名）结合Alias或者mod_rewrite指令。</p>
+<h4 id="4-让Ajax可缓存"><a href="#4-让Ajax可缓存" class="headerlink" title="4 让Ajax可缓存"></a>4 让Ajax可缓存</h4><p>Ajax可以帮助我们异步的下载网页内容，但是有些网页内容即使是异步的，用户还是在等待它的返回结果，例如ajax的返回是用户联系人的下拉列表。所以我们还是要注意尽量应用以下规则提高ajax的响应速度。<br>  ● Gzip组件   (压缩回复内容)<br>  ● 添加Expires或Cache-Control报文头使回复可以被客户端缓存<br>  ● 减少DNS查找<br>  ● 压缩JavaScript<br>  ● 避免重定向<br>  ● 配置ETags</p>
+<h4 id="5-延迟加载"><a href="#5-延迟加载" class="headerlink" title="5 延迟加载"></a>5 延迟加载</h4><p>这里讨论延迟加载需要我们知道我们的网页最初加载需要的最小内容集是什么。剩下的内容就可以推到延迟加载的集合中。<br>Javascript是典型的可以延迟加载内容。一个比较激进的做法是开发网页时先确保网页在没有Javascript的时候也可以基本工作，然后通过延迟加载脚本来完成一些高级的功能。<br>YUI Get utility<br>YUI Image Loader</p>
+<h4 id="6-预加载"><a href="#6-预加载" class="headerlink" title="6 预加载"></a>6 预加载</h4><p>预加载可能看起来和延迟加载是相反的，但它其实有不同的目标。通过预加载组件可以充分利用浏览器空闲的时间来请求将来会用到的组件（图片，样式和脚本）。用户访问下一页的时候，大部分组件都已经在缓存里了，所以在用户看来页面会加载得更快。<br>实际应用中有以下几种预加载的类型：<br>  ● 无条件预加载——尽快开始加载，获取一些额外的组件。google.com就是一个sprite图片预加载的好例子，这个sprite图片并不是google.com主页需要的，而是搜索结果页面上的内容。<br>  ● 条件性预加载——根据用户操作猜测用户将要跳转到哪里并据此预加载。在search.yahoo.com的输入框里键入内容后，可以看到那些额外组件是怎样请求加载的。<br>  ● 提前预加载——在推出新设计之前预加载。经常在重新设计之后会听到：“这个新网站不错，但比以前更慢了”，一部分原因是用户访问先前的页面都是有旧缓存的，但新的却是一种空缓存状态下的体验。可以通过在将要推出新设计之前预加载一些组件来减轻这种负面影响，老站可以利用浏览器空闲的时间来请求那些新站需要的图片和脚本。</p>
+<h4 id="7-减少DOM元素的数量"><a href="#7-减少DOM元素的数量" class="headerlink" title="7 减少DOM元素的数量"></a>7 减少DOM元素的数量</h4><p>一个复杂的页面意味着要下载更多的字节，而且用JavaScript访问DOM也会更慢。举个例子，想要添加一个事件处理器的时候，循环遍历页面上的500个DOM元素和5000个DOM元素是有区别的。<br>　　大量的DOM元素是一种征兆——页面上有些内容无关的标记需要清理。正在用嵌套表格来布局吗？还是为了修复布局问题而添了一堆的<div>s？或许应该用更好的语义化标记。<br>YUI CSS utilities对布局有很大帮助：grids.css针对整体布局，fonts.css和reset.css可以用来去除浏览器的默认格式。这是个开始清理和思考标记的好机会，例如只在语义上有意义的时候使用<div>，而不是因为它能够渲染一个新行。<br>　　DOM元素的数量很容易测试，只需要在Firebug的控制台里输入：<br>document.getElementsByTagName(‘*’).length</p>
+<p>YUI CSS utilities     <a target="_blank" rel="noopener" href="https://yuilibrary.com/">https://yuilibrary.com/</a></p>
+<h4 id="8-跨域分离组件"><a href="#8-跨域分离组件" class="headerlink" title="8 跨域分离组件"></a>8 跨域分离组件</h4><p>分离组件可以最大化并行下载，但要确保只用不超过2-4个域，因为存在DNS查找的代价。例如，可以把HTML和动态内容部署在<a target="_blank" rel="noopener" href="http://www.example.org,而把静态组件分离到static1.example.org和static2.example.org./">www.example.org，而把静态组件分离到static1.example.org和static2.example.org。</a></p>
+<h4 id="9-尽量少用iframe"><a href="#9-尽量少用iframe" class="headerlink" title="9 尽量少用iframe"></a>9 尽量少用iframe</h4><p>用iframe可以把一个HTML文档插入到父文档里，重要的是明白iframe是如何工作的并高效地使用它。<br>iframe的优点：<br>  ● 引入缓慢的第三方内容，比如标志和广告<br>  ● 安全沙箱<br>  ● 并行下载脚本<br>iframe的缺点：<br>  ● 代价高昂，即使是空白的iframe<br>  ● 阻塞页面加载<br>  ● 非语义</p>
+<h4 id="10-杜绝404"><a href="#10-杜绝404" class="headerlink" title="10  杜绝404"></a>10  杜绝404</h4><p>HTTP请求代价高昂，完全没有必要用一个HTTP请求去获取一个无用的响应（比如404 Not Found），只会拖慢用户体验而没有任何好处。<br>　　有些站点用的是有帮助的404——“你的意思是xxx？”，这样做有利于用户体验，，但也浪费了服务器资源（比如数据库等等）。最糟糕的是链接到的外部JavaScript有错误而且结果是404。首先，这种下载将阻塞并行下载。其次，浏览器会试图解析404响应体，因为它是JavaScript代码，需要找出其中可用的部分。</p>
+<p>CSS部分</p>
+<h4 id="11-避免使用css表达式"><a href="#11-避免使用css表达式" class="headerlink" title="11 避免使用css表达式"></a>11 避免使用css表达式</h4><p>用CSS表达式动态设置CSS属性，是一种强大又危险的方式。从IE5开始支持，但从IE8起就不推荐使用了。CSS表达式的问题在于它被重新计算的次数远比我们想象的要多，不仅在网页绘制或大小改变时计算，即使我们滚动屏幕或者移动鼠标的时候也在计算，因此我们还是尽量避免使用它来防止使用不当而造成的性能损耗。</p>
+<h4 id="12-选择舍弃-import"><a href="#12-选择舍弃-import" class="headerlink" title="12 选择舍弃@import"></a>12 选择<link>舍弃@import</h4><p>前面提到了一个最佳实践：为了实现逐步渲染，CSS应该放在顶部。<br>  在IE中用@import与在底部用<link>效果一样，所以最好不要用它。</p>
+<h4 id="13-避免使用滤镜"><a href="#13-避免使用滤镜" class="headerlink" title="13  避免使用滤镜"></a>13  避免使用滤镜</h4><p>IE专有的AlphaImageLoader滤镜可以用来修复IE7之前的版本中半透明PNG图片的问题。在图片加载过程中，这个滤镜会阻塞渲染，卡住浏览器，还会增加内存消耗而且是被应用到每个元素的，而不是每个图片，所以会存在一大堆问题。<br>最好的方法是干脆不要用AlphaImageLoader，而优雅地降级到用在IE中支持性很好的PNG8图片来代替。如果非要用AlphaImageLoader，应该用下划线hack：_filter来避免影响IE7及更高版本的用户。</p>
+<h4 id="14-把样式表放在顶部"><a href="#14-把样式表放在顶部" class="headerlink" title="14 把样式表放在顶部"></a>14 把样式表放在顶部</h4><p>在Yahoo!研究性能的时候，我们发现把样式表放到文档的HEAD部分能让页面看起来加载地更快。这是因为把样式表放在head里能让页面逐步渲染。</p>
+<h3 id="js部分"><a href="#js部分" class="headerlink" title="js部分"></a>js部分</h3><h4 id="15-去除重复脚本"><a href="#15-去除重复脚本" class="headerlink" title="15 去除重复脚本"></a>15 去除重复脚本</h4><p>重复的脚本不仅浪费浏览器的下载时间，而且浪费解析和执行时间。一般用来避免引入重复脚本的做法是使用统一的脚本管理模块，这样不仅可以避免重复脚本引入，还可以兼顾脚本依赖管理和版本管理。</p>
+<h4 id="16-尽量减少DOM访问"><a href="#16-尽量减少DOM访问" class="headerlink" title="16  尽量减少DOM访问"></a>16  尽量减少DOM访问</h4><p>用JavaScript访问DOM元素是很慢的，所以，为了让页面反应更迅速，应该：<br>  ● 缓存已访问过的元素的索引<br>  ● 先“离线”更新节点，再把它们添到DOM树上<br>  ● 避免用JavaScript修复布局问题</p>
+<h4 id="17-用智能的事件处理器"><a href="#17-用智能的事件处理器" class="headerlink" title="17 用智能的事件处理器"></a>17 用智能的事件处理器</h4><p>有时候感觉页面反映不够灵敏，是因为有太多频繁执行的事件处理器被添加到了DOM树的不同元素上，这就是推荐使用事件委托的原因。如果一个div里面有10个按钮，应该只给div容器添加一个事件处理器，而不是给每个按钮都添加一个。事件能够冒泡，所以可以捕获事件并得知哪个按钮是事件源。</p>
+<h4 id="18-把脚本放在底部"><a href="#18-把脚本放在底部" class="headerlink" title="18 把脚本放在底部"></a>18 把脚本放在底部</h4><p>HTTP/1.1 specification建议浏览器对同一个hostname不要超过两个并行下载连接， 所以当你从多个domain下载图片的时候可以提高并行下载连接数量。但是当脚本在下载的时候，即使是来自不同的hostname浏览器也不会下载其他资源，因为浏览器要在脚本下载之后依次解析和执行。<br>因此对于脚本提速，我们可以考虑以下方式，<br>  ● 把脚本置底，这样可以让网页渲染所需要的内容尽快加载显示给用户。<br>  ● 现在主流浏览器都支持defer关键字，可以指定脚本在文档加载后执行。<br>  ● HTML5中新加了async关键字，可以让脚本异步执行。</p>
+<h3 id="javascript-css"><a href="#javascript-css" class="headerlink" title="javascript,css"></a>javascript,css</h3><h4 id="19-引用外部javascript和css"><a href="#19-引用外部javascript和css" class="headerlink" title="19 引用外部javascript和css"></a>19 引用外部javascript和css</h4><p>使用外部Javascript和CSS文件可以使这些文件被浏览器缓存，从而在不同的请求内容之间重用。<br>同时将Javascript和CSS从inline变为external也减小了网页内容的大小。<br>使用外部Javascript和CSS文件的决定因素在于这些外部文件的重用率，如果用户在浏览我们的页面时会访问多次相同页面或者可以重用脚本的不同页面，那么外部文件形式可以为你带来很大的好处。但对于用户通常只会访问一次的页面，例如microsoft.com首页，那inline的javascript和css相对来说可以提供更高的效率。</p>
+<h4 id="20-压缩javascript和css"><a href="#20-压缩javascript和css" class="headerlink" title="20 压缩javascript和css"></a>20 压缩javascript和css</h4><p>压缩具体来说就是从代码中去除不必要的字符以减少大小，从而提升加载速度。代码最小化就是去掉所有注释和不必要的空白字符（空格，换行和tab）。在JavaScript中这样做能够提高响应性能，因为要下载的文件变小了。两个最常用的JavaScript代码压缩工具是JSMin和YUI Compressor，YUI compressor还可以压缩CSS。<br>　　混淆是一种可选的源码优化措施，要比压缩更复杂，所以混淆过程也更容易产生bug。在对美国前十的网站调查中，压缩可以缩小21%，而混淆能缩小25%。虽然混淆的缩小程度更高，但比压缩风险更大。<br>　　除了压缩外部脚本和样式，行内的script和style块也可以压缩。即使启用了gzip模块，先进行压缩也能够缩小5%或者更多的大小。JavaScript和CSS的用处越来越多，所以压缩代码会有不错的效果。</p>
+<p>用来帮助我们做精简的工具很多，主要可以参考如下，<br>JS compressors:<br>  ● Packer<br>  ● JSMin<br>  ● Closure compiler<br>  ● YUICompressor (also does CSS)<br>  ● AjaxMin (also does CSS)<br>CSS compressors:<br>  ● CSSTidy<br>  ● Minify<br>  ● YUICompressor (also does JS)<br>  ● AjaxMin (also does JS)<br>  ● CSSCompressor</p>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><h4 id="21-优化图片"><a href="#21-优化图片" class="headerlink" title="21 优化图片"></a>21 优化图片</h4><p>  ● 尝试把GIF格式转换成PNG格式，看看是否节省空间。在所有的PNG图片上运行pngcrush（或者其它PNG优化工具）</p>
+<h4 id="22-优化CSS-Sprite"><a href="#22-优化CSS-Sprite" class="headerlink" title="22 优化CSS Sprite"></a>22 优化CSS Sprite</h4><p>  ● 在Sprite图片中横向排列一般都比纵向排列的最终文件小<br>  ● 组合Sprite图片中的相似颜色可以保持低色数，最理想的是256色以下PNG8格式<br>  ● “对移动端友好”，不要在Sprite图片中留下太大的空隙。虽然不会在很大程度上影响图片文件的大小，但这样做可以节省用户代理把图片解压成像素映射时消耗的内存。100×100的图片是1万个像素，而1000×1000的图片就是100万个像素了。</p>
+<h4 id="23-不要用HTML缩放图片"><a href="#23-不要用HTML缩放图片" class="headerlink" title="23 不要用HTML缩放图片"></a>23 不要用HTML缩放图片</h4><p>不要因为在HTML中可以设置宽高而使用本不需要的大图。如果需要<br>1 <img width="100" height="100" src="mycat.jpg" alt="My Cat" /><br>　　那么图片本身（mycat.jpg）应该是100x100px的，而不是去缩小500x500px的图片。</p>
+<h4 id="24-用小的可缓存的favicon-ico-收藏夹图标"><a href="#24-用小的可缓存的favicon-ico-收藏夹图标" class="headerlink" title="24  用小的可缓存的favicon.ico(收藏夹图标)"></a>24  用小的可缓存的favicon.ico(收藏夹图标)</h4><p>favicon.ico是放在服务器根目录的图片，它会带来一堆麻烦，因为即便你不管它，浏览器也会自动请求它，所以最好不要给一个404 Not Found响应。而且只要在同一个服务器上，每次请求它时都会发送cookie，此外这个图片还会干扰下载顺序，例如在IE中，当你在onload中请求额外组件时，将会先下载favicon。<br>所以为了缓解favicon.ico的缺点，应该确保：<br>  ● 足够小，最好在1K以下<br>  ● 设置合适的有效期HTTP头（以后如果想换的话就不能重命名了），把有效期设置为几个月后一般比较安全，可以通过检查当前favicon.ico的最后修改日期来确保变更能让浏览器知道。</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><h4 id="25-给cookie减肥"><a href="#25-给cookie减肥" class="headerlink" title="25 给cookie减肥"></a>25 给cookie减肥</h4><p>使用cookie的原因有很多，比如授权和个性化。HTTP头中cookie信息在web服务器和浏览器之间交换。重要的是保证cookie尽可能的小，以最小化对用户响应时间的影响。<br>  ● 清除不必要的cookie<br>  ● 保证cookie尽可能小，以最小化对用户响应时间的影响<br>  ● 注意给cookie设置合适的域级别，以免影响其它子域<br>  ● 设置合适的有效期，更早的有效期或者none可以更快的删除cookie，提高用户响应时间</p>
+<h4 id="26-把组件放在不含cookie的域下"><a href="#26-把组件放在不含cookie的域下" class="headerlink" title="26 把组件放在不含cookie的域下"></a>26 把组件放在不含cookie的域下</h4><p>当浏览器发送对静态图像的请求时，cookie也会一起发送，而服务器根本不需要这些cookie。所以它们只会造成没有意义的网络通信量，应该确保对静态组件的请求不含cookie。可以创建一个子域，把所有的静态组件都部署在那儿。<br>　　如果域名是<a target="_blank" rel="noopener" href="http://www.example.org,可以把静态组件部署到static.example.org.然而,如果已经在顶级域example.org或者www.example.org设置了cookie,那么所有对static.example.org的请求都会含有这些cookie.这时候可以再买一个新域名,把所有的静态组件部署上去,并保持这个新域名不含cookie.yahoo!用的是yimg.com,youtube是ytimg.com,amazon是images-amazon.com等等./">www.example.org，可以把静态组件部署到static.example.org。然而，如果已经在顶级域example.org或者www.example.org设置了cookie，那么所有对static.example.org的请求都会含有这些cookie。这时候可以再买一个新域名，把所有的静态组件部署上去，并保持这个新域名不含cookie。Yahoo!用的是yimg.com，YouTube是ytimg.com，Amazon是images-amazon.com等等。</a><br>　　把静态组件部署在不含cookie的域下还有一个好处是有些代理可能会拒绝缓存带cookie的组件。有一点需要注意：如果不知道应该用example.org还是<a target="_blank" rel="noopener" href="http://www.example.org作为主页,可以考虑一下cookie的影响.省略www的话,就只能把cookie写到*.example.org,所以因为性能原因最好用www子域,并且把cookie写到这个子域下./">www.example.org作为主页，可以考虑一下cookie的影响。省略www的话，就只能把cookie写到*.example.org，所以因为性能原因最好用www子域，并且把cookie写到这个子域下。</a></p>
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><h4 id="27-保证所有组件都小于25k"><a href="#27-保证所有组件都小于25k" class="headerlink" title="27 保证所有组件都小于25k"></a>27 保证所有组件都小于25k</h4><p>这个限制是因为iPhone不能缓存大于25K的组件，注意这里指的是未压缩的大小。这就是为什么缩减内容本身也很重要，因为单纯的gzip可能不够。</p>
+<h4 id="28-把组件打包到一个复合文档里"><a href="#28-把组件打包到一个复合文档里" class="headerlink" title="28 把组件打包到一个复合文档里"></a>28 把组件打包到一个复合文档里</h4><p>把页面内容打包成复合文本就如同带有多附件的Email，它能够使你在一个HTTP请求中取得多个组建。当你使用这条规则时，首先要确定用户代理是否支持（iPhone不支持）。</p>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><h4 id="29-Gzip压缩传输文件"><a href="#29-Gzip压缩传输文件" class="headerlink" title="29 Gzip压缩传输文件"></a>29 Gzip压缩传输文件</h4><p>Gzip通常可以减少70%网页内容的大小，包括脚本、样式表、图片等文件。Gzip比deflate更高效，主流服务器都有相应的压缩支持模块。<br>IIS中内建了静态压缩和动态压缩模块，如何配制可以参考Enable HTTP Compression of Static Content (IIS 7)和Enable HTTP Compression of Dynamic Content (IIS 7)。<br>值得注意的是pdf文件可以从需要被压缩的类型中剔除，因为pdf文件本身已经压缩，gzip对其效果不大，而且会浪费CPU。</p>
+<h4 id="30-避免图片src属性为空"><a href="#30-避免图片src属性为空" class="headerlink" title="30 避免图片src属性为空"></a>30 避免图片src属性为空</h4><p>空的图片src仍然会使浏览器发送请求到服务器，这样完全是浪费时间，而且浪费服务器的资源。尤其是你的网站每天被很多人访问的时候，这种空请求造成的伤害不容忽略。<br>浏览器如此实现也是根据RFC 3986 - Uniform Resource Identifiers标准，空的src被定义为当前页面。<br>所以注意我们的网页中是否存在这样的代码<br>straight HTML<br><img src=""><br>JavaScript<br>var img = new Image();<br>img.src = “”;</p>
+<h4 id="31-配置ETags"><a href="#31-配置ETags" class="headerlink" title="31 配置ETags"></a>31 配置ETags</h4><p>虽然标题叫配制ETags，但是这里你要根据具体情况进行一些判断。首先Etag简单来说是通过一个文件版本标识使得服务器可以轻松判断该请求的内容是否有所更新，如果没有就回复304 (not modified)，从而避免下载整个文件。<br>但是Etags的版本信息即使主流服务器未能很好地支持跨服务器的判断，比如你从一个服务器集群中一台得到Etags，然后发送到了另一台那么校验很有可能会失败。</p>
+<h4 id="32-对Ajax用GET请求"><a href="#32-对Ajax用GET请求" class="headerlink" title="32 对Ajax用GET请求"></a>32 对Ajax用GET请求</h4><p>get 用来检索信息，所以他的语义只是用get请求来请求数据<br>post 用来发送需要存储到服务器的数据</p>
+<h4 id="33-尽早清空缓冲区"><a href="#33-尽早清空缓冲区" class="headerlink" title="33 尽早清空缓冲区"></a>33 尽早清空缓冲区</h4><p>网页后台程序中我们知道有个方法叫Response.Flush()，一般我们调用它都是在程序末尾，但注意这个方法可以被调用多次。目的是可以将现有的缓存中的回复内容先发给客户端，让客户端“有活干”。<br>那在什么时候调用这个方法比较好呢？一般情况下我们可以在对于需要加载比较多外部脚本或者样式表时可以提前调用一次，客户端收到了关于脚本或其他外部资源的链接可以并行的先发请求去下载，服务器接下来把后续的处理结果发给客户端。<br>当用户请求一个页面时，服务器需要用大约200到500毫秒来组装HTML页面，在这期间，浏览器闲等着数据到达。PHP中有一个flush()函数，允许给浏览器发送一部分已经准备完毕的HTML响应，以便浏览器可以在后台准备剩余部分的同时开始获取组件，好处主要体现在很忙的后台或者很“轻”的前端页面上（P.S. 也就是说，响应时耗主要在后台方面时最能体现优势）。<br>　　较理想的清空缓冲区的位置是HEAD后面，因为HTML的HEAD部分通常更容易生成，并且允许引入任何CSS和JavaScript文件，这样就可以让浏览器在后台还在处理的时候就开始并行获取组件。<br>例如：</p>
+<pre><code>&lt;/head&gt;
+&lt;?php flush(); ?&gt;
+&lt;body&gt;
+</code></pre>
+<h4 id="34-使用CDN（内容分发网络）"><a href="#34-使用CDN（内容分发网络）" class="headerlink" title="34 使用CDN（内容分发网络）"></a>34 使用CDN（内容分发网络）</h4><p>　记住终端用户80%到90%的响应时间都花在下载页面组件上了：图片，样式，脚本，Flash等等，这是业绩黄金法则。最好先分散静态内容，而不是一开始就重新设计应用程序结构。这不仅能够大大减少响应时间，还更容易表现出CDN的功劳。</p>
+<h4 id="35-添上Expires或者Cache-Control-HTTP头"><a href="#35-添上Expires或者Cache-Control-HTTP头" class="headerlink" title="35 添上Expires或者Cache-Control HTTP头"></a>35 添上Expires或者Cache-Control HTTP头</h4><p>这条规则有两个方面：<br>  ● 对于静态组件：通过设置一个遥远的将来时间作为Expires来实现永不失效<br>  ● 多余动态组件：用合适的Cache-ControlHTTP头来让浏览器进行条件性的请求<br>　　网页设计越来越丰富，这意味着页面里有更多的脚本，图片和Flash。站点的新访客可能还是不得不提交几个HTTP请求，但通过使用有效期能让组件变得可缓存，这避免了在接下来的浏览过程中不必要的HTTP请求。有效期HTTP头通常被用在图片上，但它们应该用在所有组件上，包括脚本、样式和Flash组件。<br>　　浏览器（和代理）用缓存来减少HTTP请求的数目和大小，让页面能够更快加载。web服务器通过有效期HTTP响应头来告诉客户端，页面的各个组件应该被缓存多久。用一个遥远的将来时间做有效期，告诉浏览器这个响应在2010年4月15日前不会改变。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/09/08/%E4%BC%98%E5%8C%96-%E9%9B%85%E8%99%8E%E5%89%8D%E7%AB%AF%E4%BC%98%E5%8C%96%E7%9A%8435%E6%9D%A1%E8%A7%84%E5%88%99/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2021/09/08/%E4%BC%98%E5%8C%96-%E5%A6%82%E4%BD%95%E5%81%9A%E9%A6%96%E5%B1%8F%E4%BC%98%E5%8C%96/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            首屏优化方案
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/09/08/%E6%A8%A1%E5%9D%97%E5%8C%96-vue-loadre/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">浅析vue-loader</div>
+      </a>
+    
+  </nav>
+
+  
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 伯温
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/icon.JPG" alt="伯温的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

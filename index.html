@@ -1,59 +1,66 @@
 <!DOCTYPE html>
 
 
-<html lang="zh-CN">
+<html lang="en">
+  
 
-
-<head>
-  <meta charset="utf-8" />
-    
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>
-     伯温
-  </title>
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title> 伯温的博客</title>
   <meta name="generator" content="hexo-theme-ayer">
-  
-  <link rel="shortcut icon" href="/favicon.ico" />
-  
-  
+      
+      <link rel="shortcut icon" href="/images/icon.JPG" />
+       
 <link rel="stylesheet" href="/dist/main.css">
 
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
-
-  
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
 <link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
 
-  
-  
-<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
 
-  
-  
-
-  
-
-</head>
-
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
 </html>
+
 
 <body>
   <div id="app">
+    
+      
     <main class="content on">
       
 <section class="cover">
     
-      
-      <a class="forkMe" href="https://github.com/AlanSunV"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    
   <div class="cover-frame">
     <div class="bg-box">
-      <img src="/images/pic2.jpg" alt="image frame" />
+      <img src="/images/bg4.jpg" alt="image frame" />
     </div>
     <div class="cover-inner text-center text-white">
-      <h1><a href="/">伯温</a></h1>
+      <h1><a href="/">伯温的博客</a></h1>
       <div id="subtitle-box">
         
         <span id="subtitle"></span>
@@ -73,71 +80,467 @@
 
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
 
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
 <div id="main">
   <section class="outer">
+  
+  
   <article class="articles">
     
     
     
     
-    <article id="post-JS代码开发规范" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
+    <article
+  id="post-Vue源码分析-Vue2响应式原理"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
   <div class="article-inner">
     
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/05/13/JS%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/"
-    >JS代码开发规范</a> 
+  <a class="article-title" href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/"
+    >Vue2的响应式原理</a> 
 </h2>
  
 
+      
     </header>
-    
-
-    
+     
     <div class="article-meta">
-      <a href="/2020/05/13/JS%E4%BB%A3%E7%A0%81%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="article-date">
-  <time datetime="2020-05-13T12:59:23.423Z" itemprop="datePublished">2020-05-13</time>
-</a>
-      
-      
-      
-      
+      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+   
     </div>
-    
+       
 
+    <!-- copyright -->
     
-
-    
-    
-    
-      <!-- copyright -->
-      
     <footer class="article-footer">
-      
-      
-
+       
     </footer>
-
   </div>
 
-  
-
-  
-  
-  
-
-  
-  
-  
-
+   
+    
 </article>
+
+    
+    <article
+  id="post-Vue源码分析-1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-1/"
+    >源码笔记一</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-1/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a>    
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-JavaScript-web-worker"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/JavaScript-web-worker/"
+    >web Worker</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/JavaScript-web-worker/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
+  </div>
+   
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-JavaScript-函数柯里化"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/JavaScript-%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/"
+    >函数柯里化</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/JavaScript-%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
+  </div>
+   
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-JavaScript-原型和原型链"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/JavaScript-%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/"
+    >JavaScript的原型与原型链</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/JavaScript-%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
+  </div>
+   
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-JavaScript-深浅拷贝"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/JavaScript-%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/"
+    >深浅拷贝</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/JavaScript-%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
+  </div>
+   
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-JavaScript-闭包"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/JavaScript-%E9%97%AD%E5%8C%85/"
+    >闭包</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/JavaScript-%E9%97%AD%E5%8C%85/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
+  </div>
+   
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-JavaScript-Event-Loop"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/JavaScript-Event-Loop/"
+    >EventLoop</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/JavaScript-Event-Loop/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
+  </div>
+   
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-JavaScript-es6-7-8"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/JavaScript-es6-7-8/"
+    >ES6、7、8</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/JavaScript-es6-7-8/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
+  </div>
+   
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-JavaScript-前端模块化的发展历程"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/09/08/JavaScript-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/"
+    >前端模块化发展历程</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/09/08/JavaScript-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/" class="article-date">
+  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
+  </div>
+   
+    </div>
+       
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
     
   </article>
   
 
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
   
 </section>
 </div>
@@ -147,8 +550,8 @@
     <ul>
       <li>
         Copyrights &copy;
-        2015-2020
-        <i class="ri-heart-fill heart_icon"></i> Alan Sun
+        2019-2021
+        <i class="ri-heart-fill heart_icon"></i> 伯温
       </li>
     </ul>
     <ul>
@@ -160,6 +563,9 @@
       <li>
         
       </li>
+    </ul>
+    <ul>
+      
     </ul>
     <ul>
       
@@ -171,9 +577,10 @@
       </li>
     </ul>
   </div>
-</footer>
-      <div class="float_btns">
-        <div class="totop" id="totop">
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
   <i class="ri-arrow-up-line"></i>
 </div>
 
@@ -181,14 +588,13 @@
   <i class="ri-moon-line"></i>
 </div>
 
-      </div>
-    </main>
+    </div>
     <aside class="sidebar on">
       <button class="navbar-toggle"></button>
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="伯温"></a>
+    <a href="/"><img src="/images/icon.JPG" alt="伯温的博客"></a>
   </div>
   
   <ul class="nav nav-main">
@@ -198,7 +604,11 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/about">关于我</a>
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
     </li>
     
   </ul>
@@ -207,14 +617,10 @@
   <ul class="nav">
     <li class="nav-item">
       
-      <a class="nav-item-link nav-item-search"  title="搜索">
+      <a class="nav-item-link nav-item-search"  title="Search">
         <i class="ri-search-line"></i>
       </a>
       
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
       
     </li>
   </ul>
@@ -226,12 +632,6 @@
 </div>
 </div>
     </aside>
-    <script>
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        document.querySelector('.content').classList.remove('on');
-        document.querySelector('.sidebar').classList.remove('on');
-      }
-    </script>
     <div id="mask"></div>
 
 <!-- #reward -->
@@ -244,39 +644,23 @@
   </div>
 </div>
     
-<script src="/js/jquery-2.0.3.min.js"></script>
-
-
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
 <script src="/js/lazyload.min.js"></script>
-
-<!-- Subtitle -->
-
-<script>
-  try {
-    var typed = new Typed("#subtitle", {
-      strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
-      startDelay: 0,
-      typeSpeed: 200,
-      loop: true,
-      backSpeed: 100,
-      showCursor: true
-    });
-  } catch (err) {
-    console.log(err)
-  }
-</script>
 
 <!-- Tocbot -->
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
 
 <script src="/dist/main.js"></script>
 
 <!-- ImageViewer -->
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
     <!-- Background of PhotoSwipe. 
@@ -381,8 +765,7 @@
         })
     }
     viewer_init()
-</script>
-
+</script> 
 <!-- MathJax -->
 
 <!-- Katex -->
@@ -391,12 +774,14 @@
 
 <!-- ClickLove -->
 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
 <!-- CodeCopy -->
-
-
+ 
 <link rel="stylesheet" href="/css/clipboard.css">
-
-<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 <script>
   function wait(callback, seconds) {
     var timelag = null;
@@ -450,11 +835,20 @@
     initCopyCode();
   }(window, document);
 </script>
+ 
+<!-- CanvasBackground -->
 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
 
 
     
+    
+
   </div>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"left","hOffset":100,"vOffset":-20},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 
 </html>
