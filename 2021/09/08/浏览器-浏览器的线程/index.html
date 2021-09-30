@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.1k</span>
         </span>
     </span>
 
@@ -94,20 +94,48 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h3 id="浏览器是多线程的"><a href="#浏览器是多线程的" class="headerlink" title="浏览器是多线程的"></a>浏览器是多线程的</h3><p>1.GUI渲染线程<br>2.javaScript引擎线程<br>3.定时器线程<br>4.事件线程<br>5.异步请求线程</p>
+<p>为了防止渲染出现不可预期的结果（js修改css或者dom）,GUI渲染线程和javaScript引擎线程是互斥的。<br><img src="./../assets/images/thread.jpg" alt="thread.png" title="thread"></p>
+<h3 id="渲染线程"><a href="#渲染线程" class="headerlink" title="渲染线程"></a>渲染线程</h3><p>1.解析Dom 构建为Dom tree<br>2.解析Css 构建为Css rule tree<br>3.将Css的规则树和Dom树进行合并生成render tree<br>4.回流（reflow或者layout）：计算每个盒子的位置和大小<br>5.重绘（repaint）：根据位置和大小，计算元素的绝对像素<br>6.渲染（Display）：将绝对位置给到GPU，将多个层进行合并，形成一个层，渲染到浏览器上。<br><img src="./../assets/images/render.png" alt="render.png" title="render"></p>
+<blockquote>
+<p>元素进行新增或者删除，或者改变大小或者位置，都会触发节点的回流（重排 reflow）。浏览器是流式布局的。</p>
+</blockquote>
+<blockquote>
+<p>由于浏览器是使用流式布局的 ，对render Tree的计算通常只用遍历一次就可以完成了，但table以及内部元素除外，他们可能需要计算多次，通常是花三倍同等元素的时间，这也是避免使用table布局的原因之一。</p>
+</blockquote>
+<h4 id="重绘"><a href="#重绘" class="headerlink" title="重绘"></a>重绘</h4><p>由于节点的几何属性或者样式发生了改变但是不影响布局的，称为重绘，例如 outline, visibility, color、background-color等，<br>重绘的代价是高昂的，因为浏览器必须要验证dom树上的其他节点的可见，</p>
+<h4 id="重排"><a href="#重排" class="headerlink" title="重排"></a>重排</h4><p>是布局或者几何结构发生了改变，重排是影响浏览器性能的重要因素。<br>因为它涉及到浏览器局部或者整个页面的刷新。<br>一个元素的回流可能会影响到整个dom的子元素，或者父元素，甚至祖先元素跟着重排。</p>
+<blockquote>
+<p>重排必定重绘，重绘不一定重排。</p>
+</blockquote>
+<h3 id="优化的方式"><a href="#优化的方式" class="headerlink" title="优化的方式"></a>优化的方式</h3><p>1.避免使用js操作dom<br>2.style样式改变通过class而不是手动修改<br>3.开启GPU加速渲染will-change和translateZ<br>4.documentFragment离线操作dom<br>5.比较耗时的操作放到webworker中完成</p>
+<h3 id="script-defer和async"><a href="#script-defer和async" class="headerlink" title="script defer和async"></a>script defer和async</h3><p>1.async属性会异步下载script，下载后立即执行，下载完成前不会影响html解析。<br>2.defer属性会异步下载script，下载后延迟执行，等到html解析完成后，执行完成后出发DOMcontentLoaded事件。<br>3.async是无序的  defer是有序的</p>
+<h3 id="减少重绘与回流"><a href="#减少重绘与回流" class="headerlink" title="减少重绘与回流"></a>减少重绘与回流</h3><h5 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h5><p>1.使用 transform 替代 top</p>
+<p>2.使用 visibility 替换 display: none ，因为前者只会引起重绘，后者会引发回流（改变了布局</p>
+<p>3.避免使用table布局，可能很小的一个小改动会造成整个 table 的重新布局。</p>
+<p>4.尽可能在DOM树的最末端改变class，回流是不可避免的，但可以减少其影响。尽可能在DOM树的最末端改变class，可以限制了回流的范围，使其影响尽可能少的节点。</p>
+<p>5.避免设置多层内联样式，CSS 选择符从右往左匹配查找，避免节点层级过多。</p>
+<p>6.将动画效果应用到position属性为absolute或fixed的元素上，避免影响其他元素的布局，这样只是一个重绘，而不是回流，同时，控制动画速度可以选择 requestAnimationFrame，详见探讨 requestAnimationFrame。</p>
+<p>7.避免使用CSS表达式，可能会引发回流。</p>
+<p>8.将频繁重绘或者回流的节点设置为图层，图层能够阻止该节点的渲染行为影响别的节点，例如will-change、video、iframe等标签，浏览器会自动将该节点变为图层。</p>
+<p>9.CSS3 硬件加速（GPU加速），使用css3硬件加速，可以让transform、opacity、filters这些动画不会引起回流重绘 。但是对于动画的其它属性，比如background-color这些，还是会引起回流重绘的，不过它还是可以提升这些动画的性能。</p>
+<h5 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h5><p>1.避免频繁操作样式，最好一次性重写style属性，或者将样式列表定义为class并一次性更改class属性。<br>2.避免频繁操作DOM，创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中。<br>3.避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。<br>4.对具有复杂动画的元素使用绝对定位，使它脱离文档流，否则会引起父元素及后续元素频繁回流。</p>
+ 
       <!-- reward -->
       
     </div>

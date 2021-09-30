@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Vue的加载顺序和渲染顺序 |  伯温的博客</title>
+      <title>垃圾回收 |  伯温的博客</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/images/icon.JPG" />
@@ -54,7 +54,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Vue源码分析-Vue的加载顺序和渲染顺序"
+  id="post-JavaScript-垃圾回收"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -65,7 +65,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Vue的加载顺序和渲染顺序
+  垃圾回收
 </h1>
  
 
@@ -73,11 +73,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue%E7%9A%84%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F%E5%92%8C%E6%B8%B2%E6%9F%93%E9%A1%BA%E5%BA%8F/" class="article-date">
-  <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
+      <a href="/2021/09/14/JavaScript-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" class="article-date">
+  <time datetime="2021-09-14T09:20:31.000Z" itemprop="datePublished">2021-09-14</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+    <a class="article-category-link" href="/categories/JavaScript%E5%9F%BA%E7%A1%80/">JavaScript基础</a>
   </div>
   
 <div class="word_count">
@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">284</span>
         </span>
     </span>
 
@@ -101,13 +101,23 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h4 id="什么是垃圾回收"><a href="#什么是垃圾回收" class="headerlink" title="什么是垃圾回收"></a>什么是垃圾回收</h4><p>垃圾回收也被称为GC（Garbage Collection）<br>他是一种内存的自动管理机制。<br>可以自动回收分配给程序的已经不再使用的内存，常见的垃圾回收的算法有引用计数法，和标记清楚法等。<br>V8的垃圾回收算法是由Mark-Compact和Scavenger构成</p>
+<h4 id="什么是内存泄漏"><a href="#什么是内存泄漏" class="headerlink" title="什么是内存泄漏"></a>什么是内存泄漏</h4><p>指应当被回收的对象没有被回收，变成常驻老生代的对象，导致内存占用越来越高，内存泄漏会导致应用程序速度变慢，高延迟，甚至会导致程序崩溃。</p>
+<p>内存的生命周期：分配 -&gt; 使用 -&gt; 释放</p>
+<p>内存泄漏的原因：<br>1.创建全局变量，没有手动回收<br>2.事件监听，定时器，闭包，未被正常清理</p>
+<h4 id="Reference-Counting（引用计数）算法"><a href="#Reference-Counting（引用计数）算法" class="headerlink" title="Reference Counting（引用计数）算法"></a>Reference Counting（引用计数）算法</h4><p>核心思路就是记录资源的引用次数，当引用次数为0时，就会被清除释放。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2, p3])</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([p1, p2, p3])</span><br><span class="line">  .then(fucntion (res)&#123;</span><br><span class="line">    <span class="comment">//如果这样写这里的this会指向什么地方</span></span><br><span class="line">  &#125;)  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>576 61</p>
+ 
       <!-- reward -->
       
     </div>
@@ -159,7 +169,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue%E7%9A%84%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F%E5%92%8C%E6%B8%B2%E6%9F%93%E9%A1%BA%E5%BA%8F/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/09/14/JavaScript-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -170,19 +180,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vuex%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%8E%9F%E7%90%86/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Vuex的使用方法和原理
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue2%E5%92%8C3%E7%89%88%E6%9C%AC%E7%9A%84%E5%AF%B9%E6%AF%94/" class="article-nav-link">
+      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue2%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Vue的2和3版本的区别</div>
+        <div class="article-nav-title">Vue2的响应式原理</div>
       </a>
     
   </nav>

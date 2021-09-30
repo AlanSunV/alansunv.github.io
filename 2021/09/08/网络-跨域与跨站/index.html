@@ -101,18 +101,18 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>#跨站和跨域<br>他们有什么区别？<br>同站/跨站 和 第一方/第三方 是一样的<br>但是同站和浏览器的sop同源策略的概念完全不一样</p>
-<p>同源策略<br>指两个 URL的协议  主机名  端口 三个都是一样的才是满足同源策略<br><a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a><br>协议: https<br>主机名: <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a><br>端口: 443<br>同源策略是浏览器安全的基石，cookie的同站判断则没有这么严格<br>同站：只要两个域名的eTLD+1相同即可，不需要考虑协议和端口<br>eTLD表示顶级域名<br>eTLD+1表示 有效顶级域名+二级域名。 例如：baidu.com<br>.com  .cn  .github.io</p>
-<p>什么是跨站？</p>
-<p>浏览器本身是允许cookie同站通信的；而所谓的“跨站”，比如cookie跨站实现第三方cookie，实际上就是想利用浏览器更加“开放”的那些规则来突破“同站”的限制。</p>
-<p>什么是CSRF跨站攻击？</p>
-<p>cookie往往是作为用户的标识信息，恶意网站通过携带正确的cookie信息发起HTTP请求，就是CSRF攻击。<br>比如：<br>用户返回了a.com这个网站，并携带了cookie，在浏览器中写入了cookie信息。</p>
+  <h4 id="跨站和跨域"><a href="#跨站和跨域" class="headerlink" title="跨站和跨域"></a>跨站和跨域</h4><p>他们有什么区别？<br>同站/跨站 和 第一方/第三方 是一样的<br>但是同站和浏览器的sop同源策略的概念完全不一样</p>
+<h4 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h4><p>指两个 URL的协议  主机名  端口 三个都是一样的才是满足同源策略<br><a target="_blank" rel="noopener" href="https://www.baidu.com/">https://www.baidu.com</a><br>协议: https<br>主机名: <a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a><br>端口: 443<br>同源策略是浏览器安全的基石，cookie的同站判断则没有这么严格<br>同站：只要两个域名的eTLD+1相同即可，不需要考虑协议和端口<br>eTLD表示顶级域名<br>eTLD+1表示 有效顶级域名+二级域名。 例如：baidu.com<br>.com  .cn  .github.io</p>
+<h4 id="什么是跨站？"><a href="#什么是跨站？" class="headerlink" title="什么是跨站？"></a>什么是跨站？</h4><p>浏览器本身是允许cookie同站通信的；而所谓的“跨站”，比如cookie跨站实现第三方cookie，实际上就是想利用浏览器更加“开放”的那些规则来突破“同站”的限制。</p>
+<h4 id="什么是CSRF跨站攻击？"><a href="#什么是CSRF跨站攻击？" class="headerlink" title="什么是CSRF跨站攻击？"></a>什么是CSRF跨站攻击？</h4><p>cookie往往是作为用户的标识信息，恶意网站通过携带正确的cookie信息发起HTTP请求，就是CSRF攻击。<br>比如：<br>用户返回了a.com这个网站，并携带了cookie，在浏览器中写入了cookie信息。</p>
 <p>这时候某恶意网站b.com，上有个一个表单。<br>表单的action是a.com/api</p>
 <p>这时如果用户在b.com上提交了表单，就会携带a.com网站的cookie信息。</p>
 <p>为了防止这种攻击，表单一般会携带tooken信来标识该请求是真实请求。</p>

@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">146</span>
         </span>
     </span>
 
@@ -101,13 +101,27 @@
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <p><img src="./../assets/images/cach.webp" alt="cach.webp" title="cach"></p>
+<h4 id="缓存的几个位置"><a href="#缓存的几个位置" class="headerlink" title="缓存的几个位置"></a>缓存的几个位置</h4><ol>
+<li>service worker</li>
+<li>Memory Cach</li>
+<li>Disk Cach</li>
+<li>push Cach</li>
+</ol>
+<h4 id="service-worker"><a href="#service-worker" class="headerlink" title="service worker"></a>service worker</h4><p>基于浏览器和服务器中间的角色，注册过service work后就可以拦截到当前网站的所有请求。<br>拦截到请求后如果需要发起请求就把请求发给服务器，如果使用缓存就返回缓存数据。</p>
+<blockquote>
+<p>注意点<br>使用 service worker 必须要使用https<br>运行在work的上下文中，不能访问DIOM<br>设计为异步的同步API无法在service中使用（XHR或者localStorage）<br>生命周期和页面无关</p>
+</blockquote>
+<p>在浏览器兼容</p>
+ 
       <!-- reward -->
       
     </div>

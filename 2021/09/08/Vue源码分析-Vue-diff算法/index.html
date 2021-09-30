@@ -54,7 +54,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Vue源码分析-Vue-diff算法"
+  id="post-Vue源码分析-vue-diff算法"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -73,7 +73,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue-diff%E7%AE%97%E6%B3%95/" class="article-date">
+      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-vue-diff%E7%AE%97%E6%B3%95/" class="article-date">
   <time datetime="2021-09-08T04:32:27.000Z" itemprop="datePublished">2021-09-08</time>
 </a> 
   <div class="article-category">
@@ -110,10 +110,16 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="VUE-的diff算法"><a href="#VUE-的diff算法" class="headerlink" title="VUE 的diff算法"></a>VUE 的diff算法</h1><p>什么是虚拟dom（virtual dom）<br>虚拟dom对应的是真实dom，通过createElement 和 createTexNode创建出来的都是真实dom，我通过以上两种方法创建出的dom对象，打印他们会发现会有很多属性，标准元素会实现出很多东西，如果每次都重新生成，会对资源产生很大的性能浪费。<br>virtual dom 就是通过一个简单的对象去代替复杂的dom对象，创建一个对象，对象上是dom的一些重要属性，在dom改变的时候，先比较虚拟dom的数据，如果需要改变，才会真正的去改变真实dom。<br>在优化dom的时候，相对简单的dom手动去处理是效率比较高的，但是如果是复杂的dom，嵌套比较深的，结构比较复杂的，手工去处理会花费很多时间，virtual dom不是最优的选择，但是在普适性，效率，可维护性之间达到了平衡。</p>
-<p>虚拟dom的样子就像下面这样：<br>// body下的 <div id="v" class="classA"><div> 对应的 oldVnode 就是</p>
-<p>{<br>  el:  div  //对真实的节点的引用，本例中就是document.querySelector(‘#id.classA’)<br>  tagName: ‘DIV’,   //节点的标签<br>  sel: ‘div#v.classA’  //节点的选择器<br>  data: null,       // 一个存储节点属性的对象，对应节点的el[prop]属性，例如onclick , style<br>  children: [], //存储子节点的数组，每个子节点也是vnode结构<br>  text: null,    //如果是文本节点，对应文本节点的textContent，否则为null<br>}</p>
-<h2 id="vue-diff算法的过程就是调用patch函数去给真实dom打补丁"><a href="#vue-diff算法的过程就是调用patch函数去给真实dom打补丁" class="headerlink" title="vue diff算法的过程就是调用patch函数去给真实dom打补丁"></a>vue diff算法的过程就是调用patch函数去给真实dom打补丁</h2><h2 id="patch函数有两个参数-分别是新旧的两个虚拟dom的节点"><a href="#patch函数有两个参数-分别是新旧的两个虚拟dom的节点" class="headerlink" title="patch函数有两个参数  分别是新旧的两个虚拟dom的节点"></a>patch函数有两个参数  分别是新旧的两个虚拟dom的节点</h2><h3 id="patch的第一部分是判断新旧两个节点是否值得比较"><a href="#patch的第一部分是判断新旧两个节点是否值得比较" class="headerlink" title="patch的第一部分是判断新旧两个节点是否值得比较"></a>patch的第一部分是判断新旧两个节点是否值得比较</h3><h3 id="判断两个节点的key和sel（元素选择器-）-是否都是相同的。如果是相同的才会去比较他们，"><a href="#判断两个节点的key和sel（元素选择器-）-是否都是相同的。如果是相同的才会去比较他们，" class="headerlink" title="判断两个节点的key和sel（元素选择器 ） 是否都是相同的。如果是相同的才会去比较他们，"></a>判断两个节点的key和sel（元素选择器 ） 是否都是相同的。如果是相同的才会去比较他们，</h3><p>比如p和span不是同样的标签不会去比较，<br>div.classA和div.classB class类名不同 也会认为是不同结构而不去比较它们。</p>
-<h3 id="如果节点不值得比较则会进入到替换（当不值得比较时，新节点会直接把老节点整个替换）"><a href="#如果节点不值得比较则会进入到替换（当不值得比较时，新节点会直接把老节点整个替换）" class="headerlink" title="如果节点不值得比较则会进入到替换（当不值得比较时，新节点会直接把老节点整个替换）"></a>如果节点不值得比较则会进入到替换（当不值得比较时，新节点会直接把老节点整个替换）</h3><p>获取就节点的el（真实的节点的引用）的父节点<br>通过createEle(vnode) 为新节点创建真实dom<br>然后吧parentEle把新的dom插入进去，移除旧节点的真实dom</p>
+<p>虚拟dom的样子就像下面这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;v&quot;</span> <span class="attr">class</span>=<span class="string">&quot;classA&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span> </span><br></pre></td></tr></table></figure>
+
+<p>对应的 vnode 就是</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  el:  div  <span class="comment">//对真实的节点的引用，本例中就是document.querySelector(&#x27;#id.classA&#x27;)</span></span><br><span class="line">  tagName: &#x27;DIV&#x27;,   <span class="comment">//节点的标签</span></span><br><span class="line">  sel: &#x27;div#v.classA&#x27;  <span class="comment">//节点的选择器</span></span><br><span class="line">  data: <span class="literal">null</span>,       <span class="comment">// 一个存储节点属性的对象，对应节点的el[prop]属性，例如onclick , style</span></span><br><span class="line">  children: [], <span class="comment">//存储子节点的数组，每个子节点也是vnode结构</span></span><br><span class="line">  text: <span class="literal">null</span>,    <span class="comment">//如果是文本节点，对应文本节点的textContent，否则为null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue diff算法的过程就是调用patch函数去给真实dom打补丁</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch函数有两个参数  分别是新旧的两个虚拟dom的节点</span><br></pre></td></tr></table></figure>
+<h4 id="patch的第一部分是判断新旧两个节点是否值得比较"><a href="#patch的第一部分是判断新旧两个节点是否值得比较" class="headerlink" title="patch的第一部分是判断新旧两个节点是否值得比较"></a>patch的第一部分是判断新旧两个节点是否值得比较</h4><p>判断两个节点的key和sel（元素选择器 ） 是否都是相同的。如果是相同的才会去比较他们，<br>比如p和span不是同样的标签不会去比较，<br>div.classA和div.classB class类名不同 也会认为是不同结构而不去比较它们。<br>如果节点不值得比较则会进入到替换（当不值得比较时，新节点会直接把老节点整个替换）<br>获取就节点的el（真实的节点的引用）的父节点<br>通过createEle(vnode) 为新节点创建真实dom<br>然后吧parentEle把新的dom插入进去，移除旧节点的真实dom</p>
 <p>然后会return vnode</p>
 <p>patch方法执行的时候其实就是改变了vnode（新虚拟dom）的el的值<br>改变之前vnode.el = null;<br>改变之后vnode.el = 真实dom</p>
 <h3 id="如果两个节点值得比较会调用pathVnode函数（重点⭐️）"><a href="#如果两个节点值得比较会调用pathVnode函数（重点⭐️）" class="headerlink" title="如果两个节点值得比较会调用pathVnode函数（重点⭐️）"></a>如果两个节点值得比较会调用pathVnode函数（重点⭐️）</h3><p>首先 const el = vnode.el = oldVnode.el;<br>让新节点的el引用到现在的真实dom，当el产生改变时候vnode（新的虚拟dom的节点）也会跟着一起变化。</p>
@@ -127,7 +133,12 @@
 <p>用 key：<br>维持组件的状态，保证组件的复用。因为有 key 唯一标识了组件，不会在每次比较新旧两个节点是否是同一个节点的时候直接判断为同一个节点，而是会继续在接下来的节点中找到 key 相同的节点去比较，能找到相同的 key 的话就复用节点，不能找到的话就增加或者删除节点。</p>
 <p>查找性能上的提升。有 key 的时候，会生成 hash，这样在查找的时候就是 hash 查找了，基本上就是 O(1) 的复杂度。</p>
 <p>节点复用带来的性能提升。因为有 key 唯一标识了组件，所以会尽可能多的对组件进行复用（尽管组件顺序不同），那么创建和删除节点数量就会变少，这方面的消耗就会下降，带来性能的提升。</p>
-<p>总结：性能提升不能只考虑一方面，不是 diff 快了性能就快，不是增删节点少了性能就快，不考虑量级的去评价性能，都只是泛泛而谈。<br>说明：以上描述的「节点」和「组件」其实是同一个东西，只是表达上不同而已。</p>
+<blockquote>
+<p>总结：性能提升不能只考虑一方面，不是 diff 快了性能就快，不是增删节点少了性能就快，不考虑量级的去评价性能，都只是泛泛而谈。</p>
+</blockquote>
+<blockquote>
+<p>说明：以上描述的「节点」和「组件」其实是同一个东西，只是表达上不同而已。</p>
+</blockquote>
 <p>在遍历过程中对dom操作主要是调用insertBefor</p>
 <p>对于sameVnode(oldStartVnode, newStartVnode)和sameVnode(oldEndVnode,newEndVnode)为true的情况，不需要对dom进行移动位置。</p>
 <p>在便利的过程中，有3种dom操作。</p>
@@ -135,8 +146,7 @@
 <p>如果referenceElement为null则把新节点插入到子节点的末尾处。<br>如果newElement已经存在DOM树中，newElement首先会从DOM树中移除。 所以before为null，newElement将会被插在末尾处。</p>
 <p>在结束的时候，会有两种情况：<br>1.oldStartIdx&gt;oldEndIdx表示oldCh先遍历完成，或者这个时候newCh也刚好遍历完成。<br>这个时候newStartIdx和newEndIdx之间的vnode都是新增的vnode，调用addVnodes,把这些节点通过insertBefor的方法全部插入到before的后面。</p>
 <p>2.newStartIdx&gt;newEndIdx,表示newCh是先遍历完成的。这时oldStartIdx和oldEndIdx之间的vnode在新的节点中已经是不存在了，就会调用removeVnodes方法将他们从dom中删除。</p>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="Diff算法-gt-O-n-3"><a href="#Diff算法-gt-O-n-3" class="headerlink" title="Diff算法 =&gt; O(n^3)"></a>Diff算法 =&gt; O(n^3)</h3><h3 id="将两个DOM树的所有节点两两对比，时间复杂度-O-n-2"><a href="#将两个DOM树的所有节点两两对比，时间复杂度-O-n-2" class="headerlink" title="将两个DOM树的所有节点两两对比，时间复杂度 O(n^2)"></a>将两个DOM树的所有节点两两对比，时间复杂度 O(n^2)</h3><p>   prev                   last   </p>
-<p>       A                        A<br>     /   \                    /   <br>    D     B       =&gt;         B     D<br>  /                                  <br> C                                     C</p>
+<h3 id="Diff算法-的时间复杂度为-O-n-3"><a href="#Diff算法-的时间复杂度为-O-n-3" class="headerlink" title="Diff算法 的时间复杂度为 O(n^3)"></a>Diff算法 的时间复杂度为 O(n^3)</h3><h3 id="将两个DOM树的所有节点两两对比，时间复杂度-O-n-2"><a href="#将两个DOM树的所有节点两两对比，时间复杂度-O-n-2" class="headerlink" title="将两个DOM树的所有节点两两对比，时间复杂度 O(n^2)"></a>将两个DOM树的所有节点两两对比，时间复杂度 O(n^2)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">      prev                    last   </span><br><span class="line"></span><br><span class="line">       A                        A</span><br><span class="line">     /   \                    /   \</span><br><span class="line">    D     B       =&gt;         B     D</span><br><span class="line">  /                                  \</span><br><span class="line">C                                     C</span><br></pre></td></tr></table></figure>
 <p>  所有节点两两相互对比：<br>  pA =&gt; lA<br>  pA =&gt; lB<br>  pA =&gt; lD<br>  pA =&gt; lC<br>  …<br>  pC =&gt; lC</p>
 <p>再进行树的编辑(插入、替换、删除)需要遍历一次，因此时间复杂度为 O(n^3)</p>
 <h3 id="React和vue-Diff算法-时间复杂度都是-gt-O-n-gt-简单粗暴，所有的节点按层级比较，只会遍历一次"><a href="#React和vue-Diff算法-时间复杂度都是-gt-O-n-gt-简单粗暴，所有的节点按层级比较，只会遍历一次" class="headerlink" title="React和vue Diff算法 时间复杂度都是 =&gt; O(n) =&gt; 简单粗暴，所有的节点按层级比较，只会遍历一次"></a>React和vue Diff算法 时间复杂度都是 =&gt; O(n) =&gt; 简单粗暴，所有的节点按层级比较，只会遍历一次</h3><p> # 按叶子节点位置比较<br> [0,0]              :  pA =&gt; lA      #相同，不理会<br> [0.0,0.0]        :  pD =&gt; lB      #不同，删除pD，添加lB<br> [0.1,0.1]        :  pB =&gt; lD      #不同，删除pB，添加lD<br> [0.1.0,0.1.0]  :  pC =&gt; Null   #last树没有该节点，直接删除pC<br> [0.1.2,0.1.2]  :  Null =&gt; lC    #prev树没有该节点，添加lC到该位置
@@ -193,7 +203,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue-diff%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-vue-diff%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -204,19 +214,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue2%E5%92%8C3%E7%89%88%E6%9C%AC%E7%9A%84%E5%AF%B9%E6%AF%94/" class="article-nav-link">
+      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-vue%E5%8F%8C%E5%90%91%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Vue的2和3版本的区别
+            Vue的双向数据绑定原理
           
         </div>
       </a>
     
     
-      <a href="/2021/09/08/Vue%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-Vue-nextTick%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="article-nav-link">
+      <a href="/2021/09/08/%E6%A8%A1%E5%9D%97%E5%8C%96-%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Vue 的 nextTick</div>
+        <div class="article-nav-title">前端模块化发展历程</div>
       </a>
     
   </nav>

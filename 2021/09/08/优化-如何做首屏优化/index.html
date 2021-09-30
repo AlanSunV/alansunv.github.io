@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">15</span>
+            <span class="post-count">729</span>
         </span>
     </span>
 
@@ -94,21 +94,48 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>preload与prefetch的区别对比</p>
-<p>async 与 defer的区别对比</p>
+  <h5 id="preload与prefetch的区别对比"><a href="#preload与prefetch的区别对比" class="headerlink" title="preload与prefetch的区别对比"></a>preload与prefetch的区别对比</h5><p>两者都是link标签的rel属性<br>除了ref属性<br>还有as（加载文件的属性，浏览器会根据这个确定加载的优先级）、href（加载文件的地址）、onload（加载完成的毁掉函数）、crossrigin（跨域加载的属性）<br>如果加载font文件一定要加上as属性否则会到这二次加载</p>
+<p>跨域的文件要加上crossorigin</p>
+<p>preload是提前加载<br>一般在加载css的时候会给上这个属性，以免页面在渲染的时候样式没有加载完成导致页面样式错乱</p>
+<p>preload有as属性<br>浏览器会通过as属性的值来确定加载的优先级，<br>所以preload既不会影响重要资源的加载，也不会让次要资源影响到自身的加载。</p>
+<p>prefetch<br>加载的优先级非常低<br>常用于闲时加载<br>对下个页面做预加载</p>
+<p>对于当前页面很有必要的资源使用 preload，对于可能在将来的页面中使用的资源使用 prefetch</p>
+<h5 id="async-与-defer的区别对比"><a href="#async-与-defer的区别对比" class="headerlink" title="async 与 defer的区别对比"></a>async 与 defer的区别对比</h5><p>两者都是使script标签异步加载的属性<br>不会因为js的加载导致dom的渲染阻塞</p>
+<p>defer虽然是异步加载但是如果多个script标签价了defer在执行js代码的时候还是会按照标签的先后吮吸进行加载。</p>
+<p>async不会按照script标签的先后顺序执行，而是谁先加载完成谁先执行。<br>但是如果dom渲染的速度很慢，async的脚本会在页面load完成前就执行了</p>
+<h6 id="不加任何属性的script"><a href="#不加任何属性的script" class="headerlink" title="不加任何属性的script"></a>不加任何属性的script</h6><p>文档在解析的过程中，遇到script脚本就会停止解析，去加载script脚本的内容，<br>并且会等到脚本加载完成并执行完成后才会继续加载页面。</p>
+<h6 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h6><p>script的加载不会阻塞dom的解析和渲染。<br>当页面解析和渲染完成后等所有脚本加载并按照顺序执行后才会出发DOMContentLoaded。</p>
+<blockquote>
+<p>依赖dom操作的脚本。</p>
+</blockquote>
+<h5 id="async"><a href="#async" class="headerlink" title="async"></a>async</h5><p>脚本加载完成后就会去执行。<br>完全和dom的加载渲染异步。<br>脚本的加载不计入DOMContentLoaded的时间统计</p>
+<blockquote>
+<p>适用于完全不依赖dom的脚本比如埋点统计</p>
+</blockquote>
+<h4 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h4><p>按需引入<br>分包加载<br>gzip压缩</p>
+<h4 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h4><p>http2.0<br>预加载<br>cdn分发</p>
+<blockquote>
+<p>用户距离哪台服务器的距离近就从哪个服务器加载资源</p>
+</blockquote>
+<p>对网络请求进行合并，将碎片请求进行合并</p>
+<h4 id="视觉"><a href="#视觉" class="headerlink" title="视觉"></a>视觉</h4><p>骨架屏<br>loading<br>懒加载 loading=“lazy”<br>路由和组件做动态加载</p>
+<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><p>给静态资源增加强缓存</p>
+<h4 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h4><p>做服务端渲染ssr<br>利用好script标签的async和defer这两个属性。功能独立且不要求马上执行的js文件，可以加入async属性。如果是优先级低且没有依赖的js，可以加入defer属性。</p>
  
       <!-- reward -->
       
